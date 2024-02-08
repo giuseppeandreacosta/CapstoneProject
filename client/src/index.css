@@ -1,24 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 
-:root {
-    --body_background: white;
-    --text_color: black;
-    --link_color: navy;
-    --transition_duration: 0.3s; /* Durata della transizione */
-}
-
-[data-theme="dark"] {
-    --body_background: #282c34;
-    --body_color: white;
-    --link_color: cyan;
-}
 
 
 body {
     background-color: var(--body_background);
     color: var(--body_color);
     font-family: "Roboto", sans-serif;
- 
+    height: 100vh;
     font-weight: 400;
     line-height: 1.5;
     margin: 0;

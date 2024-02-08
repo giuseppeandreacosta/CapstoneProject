@@ -15,6 +15,7 @@ const LoginPage = ({ onLogin }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'bearer': localStorage.getItem('_Id')
         },
         body: JSON.stringify({ username, password }),
       });
@@ -47,7 +48,8 @@ const LoginPage = ({ onLogin }) => {
     return <Navigate to="/userprofile" />;
   }
 
-  const handleEntiPrepostiLogin = async () => {
+  const handleEntiPrepostiLogin = async (e) => {
+    e.preventDefault();
     try {
       // Aggiungi qui la logica di autorizzazione per gli "Enti Preposti"
       // Ad esempio, puoi fare una richiesta al backend per verificare le credenziali degli "Enti Preposti"
@@ -57,6 +59,7 @@ const LoginPage = ({ onLogin }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'bearer': localStorage.getItem('_Id')
         },
         body: JSON.stringify({ username, password }),
       });
@@ -105,14 +108,16 @@ const LoginPage = ({ onLogin }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="page-link">
-                <span className="page-link-label"> Password dimenticata?</span>
-              </p>
+              
+              <Link to="/forgot-password" className="page-link-label">
+                  Hai dimenticato la password?
+                </Link>
+        
               <button className="form-btn" onClick={handleLogin}>
                 Accedi
               </button>
               <button className="form-btn" onClick={handleEntiPrepostiLogin}>
-                Entri Preposti
+                Enti Preposti
               </button>
             </form>
             <p className="sign-up-label">

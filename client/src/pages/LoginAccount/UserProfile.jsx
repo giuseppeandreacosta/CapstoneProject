@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState();
-  const [loading,setLoading] = useState(true);
-  const [error,setError] = useState(null);
+  const { id } = useParams();
+  console.log('User ID:', id);
+  
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Effettua la richiesta all'API per ottenere i dati dell'utente
-        const response = await fetch('http://localhost:3030/api/users', {
-          method: 'GET',
+        const token = localStorage.getItem('_Id');
+
+        if (!token) {
+          setError('Token non disponibile.');
+          return;
+        }
+
+        const decodedToken = parseJwt(token);
+        const userId = id || decodedToken.userId;
+
+        const response = await fetch(`http://localhost:3030/api/users/${userId}`, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('_Id')}`
+            'Authorization': `JWT ${token}`,
           },
         });
 
@@ -31,10 +51,18 @@ const UserProfile = () => {
     };
 
     fetchUserData();
-  }, []); 
+  }, [id]);
+
+  if (loading) {
+    return <p>Caricamento...</p>;
+  }
+
+  if (error) {
+    return <p>Errore: {error}</p>;
+  }
 
   if (!userData) {
-    return <p>Caricamento...</p>;
+    return <p>Dati dell'utente non disponibili.</p>;
   }
 
   return (
@@ -45,7 +73,6 @@ const UserProfile = () => {
             <Card.Body>
               <Card.Title>Profilo utente</Card.Title>
               <Card.Text>
-                
                 <p>Username: {userData.username}</p>
                 <p>Email: {userData.email}</p>
               </Card.Text>

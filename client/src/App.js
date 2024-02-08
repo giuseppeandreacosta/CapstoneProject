@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState } from "react";
 import NavBar from "./components/Navbar.jsx";
 import Home from "./pages/Home/Home.jsx";
 import About from "./pages/About/About";
@@ -12,6 +12,7 @@ import LoginPage from "./components/Login.jsx";
 import RegisterPage from "./components/Register.jsx";
 import UserProfile from "./pages/LoginAccount/UserProfile.jsx";
 import CurrentUserContext from "./components/CurrentUserContext";
+import ForgotPasswordPage from "./components/ForgotPassword.jsx";
 
 
 
@@ -42,10 +43,12 @@ function App() {
             element={<LoginPage onLogin={handleLogin} />}
           />
           <Route path="/registration" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/userprofile" element={<UserProfile />} />
+
           <Route path="*" element={<h1>Not Found 404</h1>} />
         </Routes>
-        <Footer />
+          <Footer />
       </BrowserRouter>
     </CurrentUserContext.Provider>
   );

@@ -1,6 +1,35 @@
+footer {
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+
+  height: 80px;
+}
+
+.facebook img {
+  width: 30px;
+  transition: 0.5s ease-in-out;
+}
+
+.facebook img:hover {
+  transform: scale(1.1);
+}
+
+.instagram img {
+  width: 34px;
+  transition: 0.5s ease-in-out;
+}
+
+.instagram img:hover {
+  transform: scale(1.2);
+}
+
+.twitter img {
+  width: 30px;
+  transition: 0.5s ease-in-out;
+}
+
+.twitter img:hover {
+  transform: scale(1.2);
+}
 
 
-
-.facebook a:hover {
-    color: #3b5998; /* Colore di Facebook */
-  }

@@ -3,6 +3,7 @@ import { Button, Container, Nav, Navbar, Dropdown } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../assets/images/logo.png";
+import anonymous from "../assets/images/anonymous.jpg";
 import LoginPage from "../components/Login.jsx";
 import  CurrentUserContext  from "./CurrentUserContext"; // Assicurati di inserire il percorso corretto
 
@@ -38,6 +39,7 @@ function NavBar() {
   console.log("isLoggedIn:", isLoggedIn);
 
   
+  
   return (
     <div>
       {redirectLogout && <Navigate to="/home" />}
@@ -69,7 +71,7 @@ function NavBar() {
                 <Dropdown>
                   <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
                     <img
-                      src="url_dell_immagine_del_profilo"
+                      src={anonymous}
                       alt="Immagine profilo"
                       width={30}
                       height={30}

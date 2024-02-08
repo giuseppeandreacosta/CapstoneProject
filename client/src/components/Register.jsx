@@ -1,37 +1,43 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
-import { FaFacebookSquare } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
+
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [isEntiPreposti, setIsEntiPreposti] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     const userData = {
-     
+      email: email,
       username: username,
       password: password,
     };
 
+
+
     try {
-      const response = await fetch('http://localhost:3030/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        isEntiPreposti
+          ? 'http://localhost:3030/api/enti-preposti-register'
+          : 'http://localhost:3030/api/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       if (response.ok) {
         const { user, token } = await response.json();
         console.log('Nuovo utente registrato:', user);
         console.log('Token JWT:', token);
-
-       
       } else {
         const errorMessage = await response.json();
         console.error('Errore durante la registrazione:', errorMessage.message);
@@ -51,6 +57,13 @@ const RegisterPage = () => {
               <input
                 type="text"
                 className="input"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="text"
+                className="input"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -62,6 +75,22 @@ const RegisterPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {/* Aggiungi i campi aggiuntivi per la registrazione degli "Enti Preposti" */}
+              {isEntiPreposti && (
+                <>
+                  
+                </>
+              )}
+              <div className="enti-preposti-checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={isEntiPreposti}
+                    onChange={() => setIsEntiPreposti(!isEntiPreposti)}
+                  />
+                  Registrati come Ente Preposto
+                </label>
+              </div>
               <button type="submit" className="form-btn">
                 Registrati
               </button>
@@ -72,16 +101,8 @@ const RegisterPage = () => {
                 <span className="sign-up-link">Accedi</span>
               </Link>
             </p>
-            <div className="buttons-container mt-5">
-              <div className="facebook-login-button">
-                <FaFacebookSquare />
-                <span>Registrati con Facebook</span>
-              </div>
-              <div className="google-login-button">
-                <FcGoogle />
-                <span>Registrati con Google</span>
-              </div>
-            </div>
+      
+        
           </div>
         </div>
       </div>

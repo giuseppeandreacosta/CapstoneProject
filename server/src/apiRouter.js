@@ -1,17 +1,20 @@
 // routes/apiRouter.js
 import express from 'express';
-import { registerUser, loginUser } from './controllers/authController.js';
+import { registerUser, loginUser,resetPassword } from './controllers/authController.js';
 import { getUsers } from './controllers/userController.js';
 import { createReport, getReports } from './controllers/reportController.js';
 import { createTestimonial, getTestimonials } from './controllers/testimonialController.js';
-import { createEntiPreposti } from './controllers/userEnti.js';
+import { getUserById } from './controllers/userController.js';
+import { entiPrepostiLogin, entiPrepostiRegister,  } from './controllers/entiPrepostiController.js';
 
 const apiRouter = express.Router();
 
-// Rotte per la registrazione e il login
+// Rotte per la registrazione e il login , password request
 apiRouter.post('/register', registerUser);
 apiRouter.post('/login', loginUser);
 apiRouter.get('/users', getUsers);
+apiRouter.get('/users/:id', getUserById);
+apiRouter.post('/reset-password', resetPassword);
 
 // Rotte per le segnalazioni
 apiRouter.post('/segnala-abuso', createReport);
@@ -23,6 +26,7 @@ apiRouter.get('/testimonials', getTestimonials);
 
 // Rotta enti preposti
 
-apiRouter.post('/enti-preposti-login', createEntiPreposti);
+apiRouter.post('/enti-preposti-login', entiPrepostiLogin);
+apiRouter.post('/enti-preposti-register', entiPrepostiRegister);
 
 export default apiRouter;
