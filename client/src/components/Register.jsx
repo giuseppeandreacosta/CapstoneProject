@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
-
+import { Spinner } from 'react-bootstrap';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [isEntiPreposti, setIsEntiPreposti] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const RegisterPage = () => {
       password: password,
     };
 
-
+    setLoading(true);
 
     try {
       const response = await fetch(
@@ -44,6 +45,8 @@ const RegisterPage = () => {
       }
     } catch (error) {
       console.error('Errore durante la chiamata API:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,19 +84,16 @@ const RegisterPage = () => {
                   
                 </>
               )}
-              <div className="enti-preposti-checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={isEntiPreposti}
-                    onChange={() => setIsEntiPreposti(!isEntiPreposti)}
-                  />
-                  Registrati come Ente Preposto
-                </label>
-              </div>
-              <button type="submit" className="form-btn">
-                Registrati
-              </button>
+              {/* Aggiungi lo spinner quando loading è true */}
+              {loading ? (
+                <Spinner animation="border"  role="status" className="my-3 ">
+                 
+                </Spinner>
+              ) : (
+                <button type="submit" className="form-btn">
+                  Registrati
+                </button>
+              )}
             </form>
             <p className="sign-up-label">
               Hai già un account?
@@ -101,8 +101,6 @@ const RegisterPage = () => {
                 <span className="sign-up-link">Accedi</span>
               </Link>
             </p>
-      
-        
           </div>
         </div>
       </div>

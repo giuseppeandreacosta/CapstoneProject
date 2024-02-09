@@ -13,6 +13,7 @@ import RegisterPage from "./components/Register.jsx";
 import UserProfile from "./pages/LoginAccount/UserProfile.jsx";
 import CurrentUserContext from "./components/CurrentUserContext";
 import ForgotPasswordPage from "./components/ForgotPassword.jsx";
+import UserProfileEnti from "./pages/LoginAccount/userProfileEnti.jsx";
 
 
 
@@ -45,7 +46,8 @@ function App() {
           <Route path="/registration" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/userprofile" element={<UserProfile />} />
-
+          <Route path="/userprofile/:id" element={<UserProfile />} />
+          <Route path="/userprofileenti" element={<UserProfileEnti/>} />
           <Route path="*" element={<h1>Not Found 404</h1>} />
         </Routes>
           <Footer />

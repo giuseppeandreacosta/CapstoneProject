@@ -7,9 +7,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Funzione per generare un token (da implementare in modo sicuro)
+// Function to generate a token (implement securely)
 function generateToken(user) {
-  const secret = process.env.JWT_SECRET || 'chiave_segreta_predefinita';
+  const secret = process.env.JWT_SECRET  // Change this to a secure secret
   return jwt.sign({ userId: user._id, username: user.username, role: user.role }, secret, { expiresIn: '1h' });
 }
 
@@ -32,7 +32,7 @@ export const entiPrepostiRegister = async (req, res) => {
     res.status(201).json({ user: newUser, token });
   } catch (error) {
     console.error('Errore durante la registrazione degli Enti Preposti:', error.message);
-    res.status(500).json({ message: 'Errore durante la registrazione degli Enti Preposti' });
+    res.status(500).json({ message: 'Errore durante la registrazione degli Enti Preposti', error: error.message });
   }
 };
 
@@ -57,6 +57,7 @@ export const entiPrepostiLogin = async (req, res) => {
     res.json({ user: { id: user._id, username: user.username, role: user.role }, token });
   } catch (error) {
     console.error('Errore durante il login degli Enti Preposti:', error.message);
-    res.status(500).json({ message: 'Errore durante il login degli Enti Preposti' });
+    res.status(500).json({ message: 'Errore durante il login degli Enti Preposti', error: error.message });
   }
+  console.log(req.body); 
 };

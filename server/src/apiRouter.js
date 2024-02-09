@@ -5,7 +5,8 @@ import { getUsers } from './controllers/userController.js';
 import { createReport, getReports } from './controllers/reportController.js';
 import { createTestimonial, getTestimonials } from './controllers/testimonialController.js';
 import { getUserById } from './controllers/userController.js';
-import { entiPrepostiLogin, entiPrepostiRegister,  } from './controllers/entiPrepostiController.js';
+import { entiPrepostiLogin, entiPrepostiRegister } from './controllers/entiPrepostiController.js';
+import entiPrepostiUser from './models/entiprepostiuser.js';
 
 const apiRouter = express.Router();
 
@@ -28,5 +29,6 @@ apiRouter.get('/testimonials', getTestimonials);
 
 apiRouter.post('/enti-preposti-login', entiPrepostiLogin);
 apiRouter.post('/enti-preposti-register', entiPrepostiRegister);
+apiRouter.get('/enti-preposti-users/:id', entiPrepostiUser);
 
 export default apiRouter;

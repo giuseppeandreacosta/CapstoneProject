@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 const parseJwt = (token) => {
@@ -13,7 +13,7 @@ const parseJwt = (token) => {
 const UserProfile = () => {
   const { id } = useParams();
   console.log('User ID:', id);
-  
+
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,7 +54,15 @@ const UserProfile = () => {
   }, [id]);
 
   if (loading) {
-    return <p>Caricamento...</p>;
+    return (
+      <Container className="mt-5">
+        <Row className="justify-content-center">
+          <Spinner animation="border" role="status" className="my-5">
+            <span className="sr-only">Caricamento...</span>
+          </Spinner>
+        </Row>
+      </Container>
+    );
   }
 
   if (error) {

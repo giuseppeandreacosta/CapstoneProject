@@ -15,7 +15,7 @@ const About = () => {
               <Card.Text>
                 Benvenuti nella nostra comunità dedicata alla sensibilizzazione e alla lotta contro la violenza nei confronti delle donne. La nostra missione è fornire supporto, informazioni e risorse per combattere questa grave problematica sociale.
               </Card.Text>
-              {/* ... Altri contenuti della sezione "About" ... */}
+             
             </Card.Body>
           </Card>
         </Col>
@@ -104,7 +104,7 @@ const About = () => {
               <strong>Linee Telefoniche di Emergenza:</strong> Numeri telefonici attivi 24/7 per assistenza immediata.
               <ul>
                 <li>- Nazionale Anti Violenza: Chiama il 1522</li>
-                <li>- Centro Antiviolenza Donne: Chiama il numero locale</li>
+                <li>- Centro Antiviolenza Donne: 3269874569</li>
                 {/* Aggiungi altri numeri, se necessario */}
               </ul>
             </li>
@@ -112,8 +112,8 @@ const About = () => {
             <li>
               <strong>Centri di Supporto:</strong> Luoghi fisici dove puoi ricevere supporto e consulenza.
               <ul>
-                <li>- Centro di Supporto Psicologico: Indirizzo e contatti</li>
-                <li>- Rifugio per Donne in Difficoltà: Indirizzo e contatti</li>
+                <li>- Centro di Supporto Psicologico: Via d'amelio 12 , Palermo</li>
+                <li>- Rifugio per Donne in Difficoltà:  Via pacinotti 94, Palermo</li>
                 {/* Aggiungi altri centri, se necessario */}
               </ul>
             </li>
@@ -121,8 +121,8 @@ const About = () => {
             <li>
               <strong>Organizzazioni Impegnate:</strong> Associazioni e organizzazioni che lavorano attivamente contro la violenza di genere.
               <ul>
-                <li>- Associazione No Alla Violenza: Sito web e contatti</li>
-                <li>- Organizzazione Donne Libere: Sito web e contatti</li>
+                <li>- Associazione No Alla Violenza: noallaviolenza.com</li>
+                <li>- Organizzazione Donne Libere: freewoman.com</li>
                 {/* Aggiungi altre organizzazioni, se necessario */}
               </ul>
             </li>

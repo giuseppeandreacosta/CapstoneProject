@@ -4,9 +4,9 @@ import './Contacts.css';
 
 const Contacts = () => {
   const associazioneContatti = [
-    { nome: 'Associazione XYZ', email: 'info@associazione.xyz', telefono: '+39 123 456 789' },
-    { nome: 'Responsabile Assistenza', email: 'assistenza@associazione.xyz', telefono: '+39 987 654 321' },
-    { nome: 'Volontariato', email: 'volontariato@associazione.xyz', telefono: '+39 111 222 333' },
+    { nome: 'Associazione CoopSole', email: 'info@associazione.com', telefono: '+39 123 456 789' },
+    { nome: 'Responsabile Assistenza', email: 'assistenza@associazione.com', telefono: '+39 987 654 321' },
+    { nome: 'Volontariato', email: 'volontariato@associazione.com', telefono: '+39 111 222 333' },
   ];
 
   const entiContatti = [

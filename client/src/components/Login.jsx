@@ -1,17 +1,25 @@
-import React, { useState, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
-import CurrentUserContext from "./CurrentUserContext"; // Assicurati di inserire il percorso corretto
+import React, { useState, useContext } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import CurrentUserContext from './CurrentUserContext';
 
 const LoginPage = ({ onLogin }) => {
   const { setCurrentUser } = useContext(CurrentUserContext);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isEntiPreposti, setIsEntiPreposti] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3030/api/login', {
+      let loginEndpoint = 'http://localhost:3030/api/login';
+
+      // Scegli l'endpoint corretto in base al tipo di utente
+      if (isEntiPreposti) {
+        loginEndpoint = 'http://localhost:3030/api/enti-preposti-login';
+      }
+
+      const response = await fetch(loginEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,12 +33,9 @@ const LoginPage = ({ onLogin }) => {
         localStorage.setItem('_Id', data.token);
         console.log('Login success:', data);
 
-        // Utilizza setCurrentUser per impostare i dati dell'utente nel contesto
         setCurrentUser(data.user);
-
         setLoggedIn(true);
 
-        // Se desideri gestire il login anche localmente, puoi chiamare onLogin
         if (onLogin) {
           onLogin();
         }
@@ -43,49 +48,11 @@ const LoginPage = ({ onLogin }) => {
     }
   };
 
-  // Se loggedIn è true, reindirizza l'utente
   if (loggedIn) {
-    return <Navigate to="/userprofile" />;
+    // Utilizza Navigate per il redirect
+    const redirectRoute = isEntiPreposti ? '/userprofileenti' : '/userprofile';
+    return <Navigate to={redirectRoute} />;
   }
-
-  const handleEntiPrepostiLogin = async (e) => {
-    e.preventDefault();
-    try {
-      // Aggiungi qui la logica di autorizzazione per gli "Enti Preposti"
-      // Ad esempio, puoi fare una richiesta al backend per verificare le credenziali degli "Enti Preposti"
-
-      // Simuliamo una risposta positiva per l'esempio
-      const response = await fetch('http://localhost:3030/api/enti-preposti-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'bearer': localStorage.getItem('_Id')
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('_Id', data.token);
-        console.log('Enti Preposti Login success:', data);
-
-        // Aggiorna lo stato come se fosse un login normale
-        setCurrentUser(data.user);
-        setLoggedIn(true);
-
-        // Puoi gestire ulteriori azioni come con il login normale
-        if (onLogin) {
-          onLogin();
-        }
-      } else {
-        // Se la risposta è diversa da OK, gestisci di conseguenza
-        const errorData = await response.json();
-        console.error('Enti Preposti Login failed:', response.status, errorData);
-      }
-    } catch (error) {
-      console.error('Error during Enti Preposti login:', error.message);
-    }
-  };
 
   return (
     <div className="container mt-5">
@@ -108,16 +75,24 @@ const LoginPage = ({ onLogin }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              
+
+              <div className="enti-preposti-checkbox">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={isEntiPreposti}
+                    onChange={() => setIsEntiPreposti(!isEntiPreposti)}
+                  />
+                  Accedi come Ente Preposto
+                </label>
+              </div>
+
               <Link to="/forgot-password" className="page-link-label">
-                  Hai dimenticato la password?
-                </Link>
-        
+                Hai dimenticato la password?
+              </Link>
+
               <button className="form-btn" onClick={handleLogin}>
                 Accedi
-              </button>
-              <button className="form-btn" onClick={handleEntiPrepostiLogin}>
-                Enti Preposti
               </button>
             </form>
             <p className="sign-up-label">
@@ -126,7 +101,6 @@ const LoginPage = ({ onLogin }) => {
                 <span className="sign-up-link">Registrati</span>
               </Link>
             </p>
-            
           </div>
         </div>
       </div>
