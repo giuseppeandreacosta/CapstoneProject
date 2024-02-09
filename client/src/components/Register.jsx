@@ -78,7 +78,7 @@ const RegisterPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {/* Aggiungi i campi aggiuntivi per la registrazione degli "Enti Preposti" */}
+              
               {isEntiPreposti && (
                 <>
                   

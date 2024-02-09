@@ -30,7 +30,8 @@ const Report = () => {
     setIsLoading(true);
 
     try {
-      // Simulazione di un caricamento più lungo (3 secondi)
+
+      // Simula un ritardo di 3 secondi per mostrare il loader
       await new Promise((resolve) => setTimeout(resolve, 3000));
 
       const response = await fetch('http://localhost:3030/api/segnala-abuso', {

@@ -26,13 +26,13 @@ const Footer = () => {
               </div>
               <div className="instagram">
               <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-               <img className="img-fluid" src={instagram} alt="" />
+               <img className="img-fluid" src={instagram} alt="instagram" />
               </a>
 
               </div>
               <div className="twitter">
               <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-              <img src={twitter} className="img-fluid" alt="" />
+              <img src={twitter} className="img-fluid" alt="twitter" />
               </a>
 
               </div>

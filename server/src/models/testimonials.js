@@ -4,12 +4,12 @@ import mongoose from 'mongoose';
 const testimonialSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,  // Aggiungi la validazione che il campo sia obbligatorio
+    required: true,  
   },
   age: {
     type: Number,
     required: true,
-    min: 1,  // Aggiungi la validazione che il campo sia un numero positivo
+    min: 1,  
   },
   content: {
     type: String,

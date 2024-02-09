@@ -7,9 +7,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Function to generate a token (implement securely)
+//funzione per generare il token
 function generateToken(user) {
-  const secret = process.env.JWT_SECRET  // Change this to a secure secret
+  const secret = process.env.JWT_SECRET  
   return jwt.sign({ userId: user._id, username: user.username, role: user.role }, secret, { expiresIn: '1h' });
 }
 

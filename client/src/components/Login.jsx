@@ -14,7 +14,7 @@ const LoginPage = ({ onLogin }) => {
     try {
       let loginEndpoint = 'http://localhost:3030/api/login';
 
-      // Scegli l'endpoint corretto in base al tipo di utente
+      
       if (isEntiPreposti) {
         loginEndpoint = 'http://localhost:3030/api/enti-preposti-login';
       }
@@ -49,7 +49,7 @@ const LoginPage = ({ onLogin }) => {
   };
 
   if (loggedIn) {
-    // Utilizza Navigate per il redirect
+  
     const redirectRoute = isEntiPreposti ? '/userprofileenti' : '/userprofile';
     return <Navigate to={redirectRoute} />;
   }

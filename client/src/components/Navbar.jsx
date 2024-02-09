@@ -5,7 +5,7 @@ import "./Navbar.css";
 import logo from "../assets/images/logo.png";
 import anonymous from "../assets/images/anonymous.jpg";
 import LoginPage from "../components/Login.jsx";
-import  CurrentUserContext  from "./CurrentUserContext"; // Assicurati di inserire il percorso corretto
+import  CurrentUserContext  from "./CurrentUserContext";
 
 function NavBar() {
   const { setCurrentUser } = useContext(CurrentUserContext);
